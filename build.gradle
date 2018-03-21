@@ -1,0 +1,47 @@
+group 'sample-project'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+
+jar {
+    baseName = 'sample-project'
+    version = '1.0.0'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+	//api 'org.apache.commons:commons-math3:3.6.1'
+	
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.0.M3'
+
+    compile group: 'org.springframework', name: 'spring-tx', version: '4.3.10.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aspects', version: '4.3.10.RELEASE'
+    compile group: 'org.springframework', name: 'spring-orm', version: '4.3.10.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '4.3.10.RELEASE'
+    
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.4'
+
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.0.Final-redhat-1'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.6.Final'
+    compile group: 'org.hibernate', name: 'hibernate-envers', version: '5.2.6.Final'
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
+
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+
+// Use JUnit test framework
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'junit:junit:4.12'
+}

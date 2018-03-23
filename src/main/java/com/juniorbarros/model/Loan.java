@@ -1,5 +1,7 @@
 package com.juniorbarros.model;
 
+import java.util.Calendar;
+
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
 
@@ -24,12 +26,15 @@ public class Loan extends AbstractEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     private Library library;
 
+    private Calendar loaned_on;
+
     private boolean returned;
 
     public Loan(Person person, Book book, Library library) {
         this.person = person;
         this.book = book;
         this.library = library;
+        this.loaned_on = Calendar.getInstance();
     }
 
     public Person getPerson() {
@@ -50,6 +55,10 @@ public class Loan extends AbstractEntity {
 
     public void setReturned() {
         this.returned = true;
+    }
+
+    public Calendar getLoaned_on() {
+        return loaned_on;
     }
 
     @Override

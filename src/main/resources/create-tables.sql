@@ -29,9 +29,8 @@ CREATE TABLE IF NOT EXISTS `person` (
 
 CREATE TABLE IF NOT EXISTS `loan` (
   `id` bigint(20) NOT NULL,
-  `amount` decimal(19,2) NOT NULL,
-  `date` datetime NOT NULL,
-  `type` varchar(255) NOT NULL,
+  `returned` bit(1) NOT NULL,
+  `loaned_on` datetime NOT NULL,
   `person_id` bigint(20),
   `book_id` bigint(20),
   `library_id` bigint(20),

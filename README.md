@@ -9,7 +9,6 @@ This project show how to integrate Java + Hibernate + Spring using Gradle.
 - Models - Common model files with relationships defined (POJOs)
 
 
-<br>
 ### TODO LIST
 
 - [x] Basic code

@@ -24,6 +24,8 @@ public class Loan extends AbstractEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     private Library library;
 
+    private boolean returned;
+
     public Loan(Person person, Book book, Library library) {
         this.person = person;
         this.book = book;
@@ -40,6 +42,14 @@ public class Loan extends AbstractEntity {
 
     public Library getLibrary() {
         return library;
+    }
+
+    public boolean isReturned() {
+        return returned;
+    }
+
+    public void setReturned() {
+        this.returned = true;
     }
 
     @Override

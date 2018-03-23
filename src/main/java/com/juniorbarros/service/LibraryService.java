@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import com.juniorbarros.model.Assert;
 import com.juniorbarros.model.Book;
+import com.juniorbarros.model.Genre;
 import com.juniorbarros.model.Library;
 import com.juniorbarros.model.Loan;
 import com.juniorbarros.model.Person;
@@ -18,14 +19,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class LibraryService {
 
+    @Transactional
     public Library create(int booksCapacity) {
         Library library = new Library(booksCapacity);
         return repository.save(library);
     }
 
+    @Transactional
+    public Book addBook(Long libraryId, String title, String author, String genre) {
+        Library library = repository.findById(libraryId);
+        Book book = new Book(author, title, Genre.valueOf(genre), library);
+        library.addBook(book);
+
+        bookRepository.save(book);
+        repository.save(library);
+
+        return book;
+    }
+
     @Transactional(readOnly = true)
-    public List<Library> listLibraryBooks(Long libraryId) {
-        return repository.listLibraryBooks(libraryId);
+    public List<Book> listLibraryBooks(Long libraryId) {
+        return bookRepository.listBooksByLibrary(libraryId);
     }
 
     @Transactional(readOnly = true)
@@ -51,7 +65,7 @@ public class LibraryService {
         Loan loan = new Loan(person, book, library);
 
         loanRepository.save(loan);
-        repository.save(library);
+        bookRepository.save(book);
 
         return book;
     }
@@ -64,12 +78,13 @@ public class LibraryService {
         Person person = personRepository.findById(personId);
         Library library = repository.findById(libraryId);
 
-        library.borrowBook(book);
+        library.returnBook(book);
 
-        Loan loan = new Loan(person, book, library);
+        Loan loan = loanRepository.find(person, library, book);
+        loan.setReturned();
 
         loanRepository.save(loan);
-        repository.save(library);
+        bookRepository.save(book);
 
         return book;
     }

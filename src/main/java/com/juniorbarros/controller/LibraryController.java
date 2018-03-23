@@ -11,6 +11,7 @@ import com.juniorbarros.service.LibraryService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,8 +24,13 @@ public class LibraryController {
     }
 
     @RequestMapping(value = "{libraryId}/books", method = RequestMethod.GET)
-    public List<Library> listLibraryBooks(@PathVariable Long libraryId) {
+    public List<Book> listLibraryBooks(@PathVariable Long libraryId) {
         return service.listLibraryBooks(libraryId);
+    }
+
+    @RequestMapping(value = "{libraryId}/book", method = RequestMethod.POST)
+    public Book addBook(@PathVariable Long libraryId, @RequestParam String title, @RequestParam String author, @RequestParam String genre) {
+        return service.addBook(libraryId, title, author, genre);
     }
 
     @RequestMapping(value = "/{book}/title/{title}", method = RequestMethod.GET)

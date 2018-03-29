@@ -6,8 +6,10 @@ import com.juniorbarros.model.Library;
 import com.juniorbarros.model.Loan;
 import com.juniorbarros.model.Person;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Repository
 public class LoanRepository extends AbstractRepository<Loan> {
 
     @Transactional(readOnly = true)

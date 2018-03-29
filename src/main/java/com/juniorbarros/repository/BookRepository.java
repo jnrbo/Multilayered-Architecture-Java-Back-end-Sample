@@ -5,8 +5,10 @@ import java.util.List;
 import com.juniorbarros.model.AttrsVals;
 import com.juniorbarros.model.Book;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+@Repository
 public class BookRepository extends AbstractRepository<Book> {
 
     @Transactional(readOnly = true)

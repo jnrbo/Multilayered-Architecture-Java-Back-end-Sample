@@ -15,8 +15,10 @@ import com.juniorbarros.repository.LibraryRepository;
 import com.juniorbarros.repository.LoanRepository;
 import com.juniorbarros.repository.PersonRepository;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class LibraryService {
 
     @Transactional
